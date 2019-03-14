@@ -14,13 +14,7 @@
 <link rel="stylesheet" type="text/css" href="css/Mprincipal.css" />
     </head>
 <body>
-
-
-
-
-
-
- <div class="test1">
+<div class="test1">
             <div class="content">
                 <ul class="bmenu">
                     <li><a href="#" id='home'>Acceuil</a></li>
@@ -54,29 +48,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
     // jQuery codes
     $(document).ready(function(){
@@ -127,12 +98,12 @@ $(document).on('submit', '#sign_up_form', function(){
      data : form_data,
      success : function(result) {
          // if response is a success, tell the user it was a successful sign up & empty the input boxes
-         $('#response').html("<div class='alert alert-success'>Successful sign up. Please login.</div>");
+         $('#response').html("<div class='alert alert-success'>Inscription réussis. Merci de vous connectez.</div>");
          sign_up_form.find('input').val('');
      },
      error: function(xhr, resp, text){
          // on error, tell the user sign up failed
-         $('#response').html("<div class='alert alert-danger'>Unable to sign up. Please contact admin.</div>");
+         $('#response').html("<div class='alert alert-danger'>Impossible de s'inscrire. Merci de contacter un admin si le problème persiste .</div>");
      }
  });
 
@@ -151,12 +122,14 @@ $(document).on('submit', '#login_form', function(){
  var form_data=JSON.stringify(login_form.serializeObject());
 
  // submit form data to api
-$.ajax({
+$.ajax(
+{
     url: "api/login.php",
     type : "POST",
     contentType : 'application/json',
     data : form_data,
-    success : function(result){
+    success : function(result)
+    {
  
         // store jwt to cookie
         setCookie("jwt", result.jwt, 1);
@@ -168,7 +141,7 @@ $.ajax({
     },
     error: function(xhr, resp, text){
     // on error, tell the user login has failed & empty the input boxes
-    $('#response').html("<div class='alert alert-danger'>Login failed. Email ou Mot de passe incorrect.</div>");
+    $('#response').html("<div class='alert alert-danger'>Connexion échoué. Email ou Mot de passe incorrect.</div>");
     login_form.find('input').val('');
 }
 });
@@ -301,10 +274,10 @@ function showHomePage(){
      // if valid, show homepage
 var html = `
     <div class="card">
-        <div class="card-header">Welcome to Home!</div>
+        <div class="card-header">Bienvenue dans l'acceuil!</div>
         <div class="card-body">
-            <h5 class="card-title">You are logged in.</h5>
-            <p class="card-text">You won't be able to access the home and account pages if you are not logged in.</p>
+            <h5 class="card-title">Vous êtes connecter.</h5>
+            <p class="card-text">Vous pouvez maintenant accédé a la rubrique "Votre compte"</p>
         </div>
     </div>
     `;
@@ -316,7 +289,7 @@ showLoggedInMenu();
  // show login page on error
 .fail(function(result){
     showLoginPage();
-    $('#response').html("<div class='alert alert-danger'>Veuillez vous connecté pour accédé a la rubrique HOME.</div>");
+    $('#response').html("<div class='alert alert-danger'>Veuillez vous connecté pour accédé a la rubrique Acceuil.</div>");
 })
 }
 
@@ -352,8 +325,8 @@ function showUpdateAccountForm(){
  
        // if response is valid, put user details in the form
 var html = `
-        <h2>Update Account</h2>
         <form id='update_account_form'>
+        <h2>Modifié votre profil</h2>
             <div class="form-group">
                 <label for="name">Nom Prenom</label>
                 <input type="text" class="form-control" name="name" id="name" required value="` + result.data.name + `" />
