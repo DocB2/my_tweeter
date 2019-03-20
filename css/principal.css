@@ -1,0 +1,16 @@
+@import url('reset.css');
+/* General Demo Style */
+    
+.test1
+{
+	position:relative;
+}
+
+.content
+{
+    text-align: center;
+	position:relative;
+    display: block;
+    margin: 0 auto;
+    line-height: 50px;
+}
